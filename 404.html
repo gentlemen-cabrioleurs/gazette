@@ -1,0 +1,25 @@
+---
+layout: raw
+title: "Page introuvable"
+permalink: /404.html
+---
+
+<div class="container" style="text-align: center; padding: 4rem 0;">
+  <h1>404</h1>
+  <p>Cette page n'existe pas...</p>
+  
+  <figure class="post-figure">
+    <img src="{{ '/assets/images/etang_marque.jpg' | relative_url }}" alt="Page introuvable. Mais vous avez trouvé l'indice 4: 72. Si vous avez trouvé ceci par le code source c'est assez malin de votre part mais toute la source n'est pas visible depuis votre navigateur et il faudrait chercher plus loin par la suite." />
+  </figure>
+
+  <a href="{{ '/' | relative_url }}">Retourner à l'accueil</a>
+</div>
+
+// redirect path with some upercase to all lowercase
+<script>
+  const path = window.location.pathname;
+  const lower = path.toLowerCase();
+  if (path !== lower) {
+    window.location.replace(lower);
+  }
+</script>
