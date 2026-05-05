@@ -1,0 +1,45 @@
+title: "Les Gentlemen Cabrioleurs"
+description: "La gazette officielle des Gentlemen Cabrioleurs"
+baseurl: ""
+url: "https://gentlemen-cabrioleurs.github.io"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
+
+# Pagination
+paginate: 6
+paginate_path: "/page:num/"
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Sass
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Collections
+collections:
+  authors:
+    output: false
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "La Rédaction"
+
+# Exclude
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - node_modules

@@ -1,0 +1,93 @@
+---
+layout: default
+---
+
+{% assign featured = site.posts | where_exp: "post", "post.category != nil" | first %}
+
+{% if featured %}
+<!-- ── Featured Article ───────────────────────── -->
+<section class="hero-featured">
+  <div class="container">
+    <div class="hero-inner">
+
+      <div class="hero-main">
+        {% if featured.category %}
+          <span class="category-tag">{{ featured.category }}</span>
+        {% endif %}
+        <h2><a href="{{ featured.url | relative_url }}">{{ featured.title }}</a></h2>
+        <p class="excerpt">{{ featured.excerpt | strip_html | truncate: 220 }}</p>
+        <div class="post-meta-hero">
+          Par {{ featured.author | default: "La Rédaction" }} &nbsp;·&nbsp;
+          {{ featured.date | date: "%d %B %Y" }}
+          {% if featured.read_time %} &nbsp;·&nbsp; {{ featured.read_time }} min de lecture{% endif %}
+        </div>
+      </div>
+
+      <div class="column-divider"></div>
+
+      <div class="hero-sidebar">
+        {% assign sidebar_posts = site.posts | where_exp: "post", "post.category != nil" | offset: 1 | limit: 4 %}
+        {% for post in sidebar_posts %}
+          <article class="post-card-small">
+            {% if post.category %}<span class="category">{{ post.category }}</span>{% endif %}
+            <h4><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h4>
+            <span class="meta">{{ post.date | date: "%d %B %Y" }} · {{ post.author | default: "La Rédaction" }}</span>
+          </article>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ── Dernières Publications ────────────────── -->
+<section class="posts-section">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-title">Dernières Publications</span>
+    </div>
+
+    <div class="posts-grid">
+      {% assign grid_posts = site.posts | where_exp: "post", "post.category != nil" | offset: 1 %}
+      {% for post in grid_posts limit: 6 %}
+        <article class="post-card">
+          {% if post.category %}
+            <div class="post-card-category">{{ post.category }}</div>
+          {% endif %}
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
+          <div class="post-card-meta">
+            <span>{{ post.author | default: "La Rédaction" }}</span>
+            <span>{{ post.date | date: "%d %b %Y" }}</span>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if paginator.total_pages > 1 %}
+    <nav class="pagination">
+      {% if paginator.previous_page %}
+        <a href="{{ paginator.previous_page_path | relative_url }}">&larr; Plus récent</a>
+      {% endif %}
+
+      {% for page in (1..paginator.total_pages) %}
+        {% if page == paginator.page %}
+          <span class="current">{{ page }}</span>
+        {% elsif page == 1 %}
+          <a href="{{ '/' | relative_url }}">{{ page }}</a>
+        {% else %}
+          <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{ page }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if paginator.next_page %}
+        <a href="{{ paginator.next_page_path | relative_url }}">Plus ancien &rarr;</a>
+      {% endif %}
+    </nav>
+    {% endif %}
+
+  </div>
+</section>

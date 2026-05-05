@@ -1,0 +1,21 @@
+# Jekyll build output
+_site/
+.jekyll-cache/
+.jekyll-metadata/
+
+# Ruby dependencies
+Gemfile.lock
+
+# Dependency directories
+vendor/
+.bundle/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.idea/
+.vscode/
+*.swp
+*.swo

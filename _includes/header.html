@@ -1,0 +1,30 @@
+<header class="site-header">
+
+  <!-- Masthead -->
+  <div class="header-masthead">
+    <div class="container">
+      <div class="masthead-ornament">La Gazette Officielle</div>
+      <div class="site-title">
+        Les <span>Gentlemen</span> Cabrioleurs
+      </div>
+      <!-- <div class="site-subtitle">{{ site.description }}</div> -->
+      <div class="masthead-rule">
+        <span class="deco">✦</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="header-nav">
+    <div class="container">
+      <nav>
+        <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Accueil</a>
+        <a href="{{ '/actualites/' | relative_url }}" {% if page.url contains 'actualites' %}class="active"{% endif %}>Actualités</a>
+        <a href="{{ '/evenements/' | relative_url }}" {% if page.url contains 'evenements' %}class="active"{% endif %}>Événements</a>
+        <a href="{{ '/reportages/' | relative_url }}" {% if page.url contains 'reportages' %}class="active"{% endif %}>Reportages</a>
+        <a href="{{ '/a-propos/' | relative_url }}" {% if page.url contains 'a-propos' %}class="active"{% endif %}>À Propos</a>
+      </nav>
+    </div>
+  </div>
+
+</header>

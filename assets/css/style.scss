@@ -1,0 +1,35 @@
+---
+---
+@import "main";
+
+.post-figure {
+  margin: 2rem 0;
+  text-align: center;
+}
+.post-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.post-figure figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--text-muted, #888);
+  letter-spacing: 0.03em;
+}
+
+.video-embed {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+.video-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

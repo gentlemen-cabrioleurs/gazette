@@ -1,0 +1,80 @@
+---
+layout: default
+---
+
+<article>
+
+  <header class="post-header">
+    <div class="container">
+      {% if page.category %}
+        <span class="post-category">{{ page.category }}</span>
+      {% endif %}
+      <h1>{{ page.title }}</h1>
+      {% if page.subtitle %}
+        <p class="post-subtitle">{{ page.subtitle }}</p>
+      {% endif %}
+      <div class="post-meta">
+        Par <strong>{{ page.author | default: "La Rédaction" }}</strong>
+        &nbsp;·&nbsp;
+        {{ page.date | date: "%d %B %Y" }}
+        {% if page.read_time %} &nbsp;·&nbsp; {{ page.read_time }} min de lecture{% endif %}
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="post-content {% if page.drop_cap %}drop-cap{% endif %}">
+      {{ content }}
+    </div>
+
+    <footer class="post-footer">
+      {% if page.tags and page.tags.size > 0 %}
+        <div class="post-tags">
+          {% for tag in page.tags %}
+            <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="author-box">
+        <div class="author-avatar">
+          {{ page.author | default: "R" | slice: 0 }}
+        </div>
+        <div class="author-info">
+          <div class="author-name">{{ page.author | default: "La Rédaction" }}</div>
+          <div class="author-title">{% if page.author_title %}{{ page.author_title }}{% else %}Gentleman Cabrioleur{% endif %}</div>
+          {% if page.author_bio %}
+            <p class="author-bio">{{ page.author_bio }}</p>
+          {% else %}
+            <p class="author-bio">Membre distingué des Gentlemen Cabrioleurs, passionné de bonnes choses et de belles lettres.</p>
+          {% endif %}
+        </div>
+      </div>
+
+    </footer>
+  </div>
+
+</article>
+
+<!-- ── Articles Récents ──────────────────────── -->
+<section class="posts-section" style="background: var(--cream-dark); padding: 2.5rem 0;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-title">À lire également</span>
+    </div>
+    <div class="posts-grid">
+      {% assign related = site.posts | where_exp: "p", "p.url != page.url and p.category" | limit: 3 %}
+      {% for post in related %}
+        <article class="post-card">
+          {% if post.category %}<div class="post-card-category">{{ post.category }}</div>{% endif %}
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncate: 140 }}</p>
+          <div class="post-card-meta">
+            <span>{{ post.author | default: "La Rédaction" }}</span>
+            <span>{{ post.date | date: "%d %b %Y" }}</span>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
